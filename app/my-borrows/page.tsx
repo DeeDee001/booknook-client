@@ -18,18 +18,24 @@ import {
 import { toast } from "sonner";
 
 function MyBorrowsContent() {
-  const { user, token } = useAuth();
+  const { user, token, isLoading: isAuthLoading } = useAuth();
   const [borrows, setBorrows] = useState<Borrow[]>([]);
   const [loading, setLoading] = useState(true);
   const [returningId, setReturningId] = useState<string | null>(null);
 
   const loadBorrows = async () => {
-    if (!user?.email || !token) return;
+    if (isAuthLoading) return;
+    if (!user?.email || !token) {
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     try {
       const res = await fetchUserBorrows(user.email, token);
       if (res.success && res.data) {
         setBorrows(res.data);
+      } else {
+        toast.error(res.message || "Failed to fetch borrowed books.");
       }
     } catch (err) {
       toast.error("Failed to fetch borrowed books.");
@@ -40,7 +46,7 @@ function MyBorrowsContent() {
 
   useEffect(() => {
     loadBorrows();
-  }, [user?.email, token]);
+  }, [user?.email, token, isAuthLoading]);
 
   const handleReturnBook = async (borrowId: string, bookTitle: string) => {
     if (!token) return;
@@ -109,46 +115,43 @@ function MyBorrowsContent() {
                         <img
                           src={borrow.bookImage}
                           alt={borrow.bookTitle}
-                          className="w-14 h-20 object-cover rounded-lg border border-stone-200 dark:border-stone-800 shadow-sm"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src =
-                              "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=300&q=80";
-                          }}
+                          className="w-12 h-16 object-cover rounded-lg shadow-sm border border-stone-200 dark:border-stone-700"
                         />
                       </td>
 
                       {/* Title */}
-                      <td className="py-4 px-6 font-semibold text-stone-900 dark:text-stone-100">
+                      <td className="py-4 px-6 font-semibold text-stone-900 dark:text-stone-100 max-w-xs">
                         <Link
                           href={`/books/${borrow.bookId}`}
-                          className="hover:text-primary-700 dark:hover:text-primary-400 hover:underline transition-colors"
+                          className="hover:text-primary-700 dark:hover:text-primary-400 transition-colors line-clamp-1"
                         >
                           {borrow.bookTitle}
                         </Link>
                       </td>
 
                       {/* Borrow Date */}
-                      <td className="py-4 px-6 text-stone-600 dark:text-stone-300">
-                        <div className="flex items-center gap-1.5 text-xs sm:text-sm">
-                          <Calendar className="w-4 h-4 text-primary-600" />
+                      <td className="py-4 px-6 text-stone-600 dark:text-stone-400 whitespace-nowrap">
+                        <div className="flex items-center gap-1.5">
+                          <Calendar className="w-3.5 h-3.5 text-stone-400" />
                           <span>{borrow.borrowDate}</span>
                         </div>
                       </td>
 
                       {/* Return Date */}
-                      <td className="py-4 px-6 text-stone-600 dark:text-stone-300">
-                        <div className="flex items-center gap-1.5 text-xs sm:text-sm">
-                          <Clock className="w-4 h-4 text-amber-600" />
-                          <span className="font-medium">{borrow.returnDate}</span>
+                      <td className="py-4 px-6 font-medium text-primary-700 dark:text-primary-400 whitespace-nowrap">
+                        <div className="flex items-center gap-1.5">
+                          <Clock className="w-3.5 h-3.5" />
+                          <span>{borrow.returnDate}</span>
                         </div>
                       </td>
 
-                      {/* Return Action Button */}
-                      <td className="py-4 px-6 text-right">
+                      {/* Return Action */}
+                      <td className="py-4 px-6 text-right whitespace-nowrap">
                         <button
+                          type="button"
                           onClick={() => handleReturnBook(borrow._id, borrow.bookTitle)}
                           disabled={isProcessing}
-                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-primary-50 dark:bg-primary-950/40 text-primary-700 dark:text-primary-300 hover:bg-primary-700 hover:text-white dark:hover:bg-primary-600 dark:hover:text-white border border-primary-200 dark:border-primary-800/80 shadow-sm transition-all"
+                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg border border-primary-600 hover:bg-primary-50 dark:hover:bg-primary-950/40 text-primary-700 dark:text-primary-400 text-xs font-semibold shadow-sm transition-all disabled:opacity-50"
                         >
                           {isProcessing ? (
                             <>
@@ -171,23 +174,28 @@ function MyBorrowsContent() {
           </div>
         </div>
       ) : (
-        <div className="rounded-2xl border border-dashed border-stone-300 dark:border-stone-800 p-12 text-center space-y-4">
+        /* Empty State */
+        <div className="rounded-2xl border-2 border-dashed border-stone-200 dark:border-stone-800 p-12 text-center space-y-4 bg-white/50 dark:bg-stone-900/50">
           <div className="w-16 h-16 mx-auto rounded-full bg-stone-100 dark:bg-stone-800 text-stone-400 flex items-center justify-center">
             <BookOpen className="w-8 h-8" />
           </div>
-          <h3 className="text-lg font-bold text-stone-900 dark:text-stone-100">
-            You currently have no borrowed books
-          </h3>
-          <p className="text-sm text-stone-600 dark:text-stone-400 max-w-md mx-auto">
-            Explore the library catalog to find fascinating stories, memoirs, and guides to borrow.
-          </p>
-          <Link
-            href="/books"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary-700 hover:bg-primary-800 text-white text-sm font-semibold shadow-sm transition-colors"
-          >
-            <span>Browse Library Catalog</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          <div className="space-y-1">
+            <h3 className="text-base font-bold text-stone-900 dark:text-stone-100">
+              No Borrowed Books Found
+            </h3>
+            <p className="text-sm text-stone-500 dark:text-stone-400 max-w-sm mx-auto">
+              Your borrowing shelf is currently empty. Explore the catalog to discover and borrow your next story.
+            </p>
+          </div>
+          <div className="pt-2">
+            <Link
+              href="/books"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary-700 hover:bg-primary-800 text-white font-semibold text-xs shadow-md transition-all"
+            >
+              <span>Explore All Books</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       )}
     </div>

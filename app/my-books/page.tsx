@@ -23,7 +23,7 @@ import {
 import { toast } from "sonner";
 
 function MyBooksContent() {
-  const { user, token } = useAuth();
+  const { user, token, isLoading: isAuthLoading } = useAuth();
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(true);
 
