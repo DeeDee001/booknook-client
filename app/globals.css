@@ -57,6 +57,15 @@ body {
 }
 
 /* Swiper custom styling */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
 .swiper-pagination-bullet {
   background: #a8a29e !important;
   opacity: 0.6;
