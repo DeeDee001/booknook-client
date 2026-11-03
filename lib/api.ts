@@ -72,14 +72,18 @@ export async function fetchBooks(params?: {
 }): Promise<{ success: boolean; data: Book[]; count?: number; message?: string }> {
   try {
     const query = new URLSearchParams();
-    if (params?.category && params.category !== "All") query.append("category", params.category);
-    if (params?.search) query.append("search", params.search);
+    if (params?.category && params.category !== "All") query.append("category", params.category.trim());
+    if (params?.search) query.append("search", params.search.trim());
     if (params?.limit) query.append("limit", params.limit.toString());
     if (params?.sort) query.append("sort", params.sort);
-    if (params?.email) query.append("email", params.email);
+    if (params?.email) query.append("email", params.email.trim());
 
     const url = `${API_BASE_URL}/books${query.toString() ? `?${query.toString()}` : ""}`;
     const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      return { success: false, data: [], message: errData.message || `Server responded with ${res.status}` };
+    }
     const data = await res.json();
     return data;
   } catch (err: any) {
