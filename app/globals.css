@@ -39,6 +39,7 @@ body {
   display: flex;
   flex-direction: column;
   transition: background-color 0.25s ease, color 0.25s ease;
+  overflow-x: hidden;
 }
 
 /* Custom modern scrollbar */
@@ -97,4 +98,12 @@ body {
 .swiper-button-prev:after {
   font-size: 18px !important;
   font-weight: bold;
+}
+
+/* Mobile responsive fixes: hide bulky swiper navigation arrows on phones */
+@media (max-width: 640px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none !important;
+  }
 }

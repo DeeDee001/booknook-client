@@ -87,7 +87,7 @@ function AddBookContent() {
         <div className="w-12 h-12 mx-auto rounded-xl bg-primary-700 text-white flex items-center justify-center shadow-md">
           <PlusCircle className="w-6 h-6" />
         </div>
-        <h1 className="text-3xl font-extrabold text-stone-900 dark:text-stone-100 tracking-tight">
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-stone-900 dark:text-stone-100 tracking-tight">
           Add a Book to the Library
         </h1>
         <p className="text-sm text-stone-600 dark:text-stone-400 max-w-md mx-auto">
@@ -96,7 +96,7 @@ function AddBookContent() {
       </div>
 
       {/* Book Form Container */}
-      <div className="rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 p-6 sm:p-8 shadow-xl">
+      <div className="rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 p-4 sm:p-8 shadow-xl">
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {/* Book Title */}

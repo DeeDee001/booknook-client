@@ -59,7 +59,7 @@ function BooksCatalog() {
       </div>
 
       {/* Filter, Search & Sort Bar */}
-      <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between bg-white dark:bg-stone-900 p-4 sm:p-5 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-sm">
+      <div className="flex flex-col lg:flex-row gap-3.5 items-stretch lg:items-center justify-between bg-white dark:bg-stone-900 p-4 sm:p-5 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-sm">
         {/* Search Input */}
         <div className="relative flex-1">
           <Search className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -72,15 +72,15 @@ function BooksCatalog() {
           />
         </div>
 
-        {/* Category Filter Pills & Sort Dropdown */}
-        <div className="flex flex-wrap sm:flex-nowrap items-center gap-3">
+        {/* Category Filter & Sort Dropdowns: Grid on mobile, inline on desktop */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full lg:w-auto">
           {/* Category Dropdown */}
-          <div className="flex items-center gap-2">
-            <Filter className="w-4 h-4 text-stone-400 shrink-0" />
+          <div className="relative">
+            <Filter className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="px-3.5 py-2.5 rounded-xl text-sm font-medium bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-stone-900 dark:text-stone-100 focus:outline-none focus:ring-2 focus:ring-primary-600"
+              className="w-full pl-10 pr-8 py-2.5 rounded-xl text-sm font-medium bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-stone-900 dark:text-stone-100 focus:outline-none focus:ring-2 focus:ring-primary-600 appearance-none cursor-pointer"
             >
               <option value="All">All Categories</option>
               {CATEGORIES.map((cat) => (
@@ -92,23 +92,23 @@ function BooksCatalog() {
           </div>
 
           {/* Sort Dropdown */}
-          <div className="flex items-center gap-2">
-            <ArrowUpDown className="w-4 h-4 text-stone-400 shrink-0" />
+          <div className="relative">
+            <ArrowUpDown className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <select
               value={sortOrder}
               onChange={(e) => setSortOrder(e.target.value)}
-              className="px-3.5 py-2.5 rounded-xl text-sm font-medium bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-stone-900 dark:text-stone-100 focus:outline-none focus:ring-2 focus:ring-primary-600"
+              className="w-full pl-10 pr-8 py-2.5 rounded-xl text-sm font-medium bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-stone-900 dark:text-stone-100 focus:outline-none focus:ring-2 focus:ring-primary-600 appearance-none cursor-pointer"
             >
               <option value="newest">Newest First</option>
               <option value="oldest">Oldest First</option>
-              <option value="copies-desc">Most Copies Available</option>
-              <option value="copies-asc">Fewest Copies Available</option>
+              <option value="copies-desc">Most Copies</option>
+              <option value="copies-asc">Fewest Copies</option>
             </select>
           </div>
         </div>
       </div>
 
-      {/* Book Grid: 3 cards per row on desktop as requested */}
+      {/* Book Grid */}
       {loading ? (
         <div className="min-h-[400px] flex flex-col items-center justify-center gap-3">
           <Loader2 className="w-10 h-10 animate-spin text-primary-600" />
@@ -123,7 +123,7 @@ function BooksCatalog() {
           ))}
         </div>
       ) : (
-        <div className="rounded-2xl border border-dashed border-stone-300 dark:border-stone-800 p-12 text-center space-y-4">
+        <div className="rounded-2xl border border-dashed border-stone-300 dark:border-stone-800 p-8 sm:p-12 text-center space-y-4">
           <div className="w-16 h-16 mx-auto rounded-full bg-stone-100 dark:bg-stone-800 text-stone-400 flex items-center justify-center">
             <BookOpen className="w-8 h-8" />
           </div>

@@ -52,7 +52,7 @@ export const BannerSlider: React.FC = () => {
         }}
         navigation
         loop
-        className="w-full h-[460px] sm:h-[520px] lg:h-[580px]"
+        className="w-full h-[440px] sm:h-[500px] lg:h-[560px]"
       >
         {slides.map((slide) => (
           <SwiperSlide key={slide.id}>
@@ -62,28 +62,28 @@ export const BannerSlider: React.FC = () => {
                 className="absolute inset-0 bg-cover bg-center"
                 style={{ backgroundImage: `url(${slide.image})` }}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-stone-950/90 via-stone-950/70 to-stone-900/40" />
+                <div className="absolute inset-0 bg-gradient-to-r from-stone-950/95 via-stone-950/80 to-stone-900/50" />
               </div>
 
               {/* Slide Content */}
-              <div className="relative z-10 max-w-2xl px-6 sm:px-12 lg:px-16 text-white space-y-5">
+              <div className="relative z-10 max-w-2xl px-5 sm:px-12 lg:px-16 text-white space-y-4 sm:space-y-5">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-600/30 border border-primary-500/40 backdrop-blur-md text-primary-200 text-xs sm:text-sm font-medium">
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>{slide.badge}</span>
                 </div>
 
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight sm:leading-tight">
+                <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-snug sm:leading-tight">
                   {slide.title}
                 </h1>
 
-                <p className="text-stone-300 text-sm sm:text-base lg:text-lg leading-relaxed max-w-xl">
+                <p className="text-stone-300 text-xs sm:text-base lg:text-lg leading-relaxed max-w-xl line-clamp-3 sm:line-clamp-none">
                   {slide.description}
                 </p>
 
                 <div className="pt-2">
                   <Link
                     href="/books"
-                    className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-primary-600 hover:bg-primary-500 text-white font-semibold shadow-lg hover:shadow-primary-600/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+                    className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3.5 rounded-xl bg-primary-600 hover:bg-primary-500 text-white font-semibold text-xs sm:text-sm shadow-lg hover:shadow-primary-600/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
                   >
                     <BookOpen className="w-4 h-4" />
                     <span>{slide.buttonText}</span>

@@ -66,7 +66,7 @@ export const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Left: Logo & Website Name */}
         <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-10 h-10 rounded-xl bg-primary-700 text-white flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-200">
+          <div className="w-10 h-10 rounded-xl bg-primary-700 text-white flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-200 shrink-0">
             <BookOpen className="w-5 h-5" />
           </div>
           <span className="text-xl sm:text-2xl font-bold tracking-tight text-stone-900 dark:text-stone-100 group-hover:text-primary-700 dark:group-hover:text-primary-400 transition-colors">
@@ -95,7 +95,7 @@ export const Navbar: React.FC = () => {
         </nav>
 
         {/* Right: Theme Toggle & Auth / Profile */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           {/* Theme Toggle Button */}
           {mounted && (
             <button
@@ -112,7 +112,7 @@ export const Navbar: React.FC = () => {
             </button>
           )}
 
-          {/* User Auth Section */}
+          {/* User Auth Section Desktop */}
           {isLoading ? (
             <div className="w-9 h-9 rounded-full bg-stone-200 dark:bg-stone-700 animate-pulse" />
           ) : user ? (
@@ -205,7 +205,7 @@ export const Navbar: React.FC = () => {
           {/* Mobile Menu Toggle Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800"
+            className="md:hidden p-2 rounded-lg text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors"
             aria-label="Toggle mobile menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -215,43 +215,81 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 px-4 pt-3 pb-6 space-y-2">
-          {visibleLinks.map((link) => {
-            const isActive = pathname === link.href;
-            return (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`block px-4 py-2.5 rounded-lg text-base font-medium transition-colors ${
-                  isActive
-                    ? "bg-primary-50 dark:bg-primary-950/50 text-primary-800 dark:text-primary-300 font-semibold"
-                    : "text-stone-700 dark:text-stone-200 hover:bg-stone-100 dark:hover:bg-stone-800"
-                }`}
-              >
-                {link.name}
-              </Link>
-            );
-          })}
+        <div className="md:hidden border-t border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 px-4 pt-3 pb-6 space-y-3 animate-in slide-in-from-top-2 duration-150 shadow-xl">
+          {/* User info if logged in */}
+          {user && (
+            <div className="p-3 rounded-xl bg-stone-50 dark:bg-stone-800/60 border border-stone-100 dark:border-stone-800 flex items-center gap-3">
+              {user.image ? (
+                <img
+                  src={user.image}
+                  alt={user.name || "User Avatar"}
+                  className="w-10 h-10 rounded-full object-cover border-2 border-primary-600/40 shrink-0"
+                  referrerPolicy="no-referrer"
+                />
+              ) : (
+                <div className="w-10 h-10 rounded-full bg-primary-700 text-white flex items-center justify-center font-bold text-sm shrink-0">
+                  {user.name ? user.name.charAt(0).toUpperCase() : "U"}
+                </div>
+              )}
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-bold text-stone-900 dark:text-stone-100 truncate">
+                  {user.name}
+                </p>
+                <p className="text-xs text-stone-500 dark:text-stone-400 truncate">
+                  {user.email}
+                </p>
+              </div>
+            </div>
+          )}
 
-          {!user && !isLoading && (
-            <div className="pt-4 border-t border-stone-100 dark:border-stone-800 flex flex-col gap-2">
+          <div className="space-y-1">
+            {visibleLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`block px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+                    isActive
+                      ? "bg-primary-50 dark:bg-primary-950/50 text-primary-800 dark:text-primary-300 font-semibold"
+                      : "text-stone-700 dark:text-stone-200 hover:bg-stone-100 dark:hover:bg-stone-800"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+          </div>
+
+          {user ? (
+            <div className="pt-2 border-t border-stone-100 dark:border-stone-800">
+              <button
+                onClick={handleLogout}
+                className="w-full flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-sm font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors"
+              >
+                <LogOut className="w-4 h-4" />
+                <span>Logout from BookNook</span>
+              </button>
+            </div>
+          ) : !isLoading ? (
+            <div className="pt-3 border-t border-stone-100 dark:border-stone-800 flex flex-col gap-2">
               <Link
                 href="/login"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-center py-2.5 rounded-lg text-base font-medium border border-stone-300 dark:border-stone-700 text-stone-800 dark:text-stone-200"
+                className="w-full text-center py-2.5 rounded-xl text-sm font-medium border border-stone-300 dark:border-stone-700 text-stone-800 dark:text-stone-200"
               >
                 Login
               </Link>
               <Link
                 href="/register"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-center py-2.5 rounded-lg text-base font-medium bg-primary-700 text-white"
+                className="w-full text-center py-2.5 rounded-xl text-sm font-semibold bg-primary-700 text-white shadow-sm"
               >
                 Register
               </Link>
             </div>
-          )}
+          ) : null}
         </div>
       )}
     </header>
