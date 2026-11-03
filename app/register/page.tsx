@@ -9,7 +9,6 @@ import {
   User,
   Mail,
   Lock,
-  Image as ImageIcon,
   Eye,
   EyeOff,
   UserPlus,
@@ -28,7 +27,6 @@ function RegisterForm() {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [photoUrl, setPhotoUrl] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -68,9 +66,7 @@ function RegisterForm() {
 
     setLoading(true);
     try {
-      const defaultPhoto =
-        photoUrl.trim() ||
-        `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(name.trim())}`;
+      const defaultPhoto = `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(name.trim())}`;
 
       const result = await signUp.email({
         name: name.trim(),
@@ -168,23 +164,6 @@ function RegisterForm() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="jane.austen@booknook.com"
               required
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-stone-900 dark:text-stone-100 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all"
-            />
-          </div>
-        </div>
-
-        {/* Photo URL Field */}
-        <div className="space-y-1.5">
-          <label className="text-xs font-semibold text-stone-700 dark:text-stone-300">
-            Profile Photo URL (Optional)
-          </label>
-          <div className="relative">
-            <ImageIcon className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-            <input
-              type="url"
-              value={photoUrl}
-              onChange={(e) => setPhotoUrl(e.target.value)}
-              placeholder="https://example.com/avatar.jpg"
               className="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-stone-900 dark:text-stone-100 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent transition-all"
             />
           </div>

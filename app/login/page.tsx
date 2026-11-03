@@ -75,10 +75,7 @@ function LoginForm() {
     }
   };
 
-  const handleForgotPassword = (e: React.MouseEvent) => {
-    e.preventDefault();
-    toast.info("Password reset is disabled for evaluation purposes per exam guidelines.");
-  };
+  
 
   return (
     <div className="w-full max-w-md mx-auto p-6 sm:p-8 rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 shadow-xl space-y-6">
@@ -124,18 +121,9 @@ function LoginForm() {
 
         {/* Password Field */}
         <div className="space-y-1.5">
-          <div className="flex items-center justify-between">
-            <label className="text-xs font-semibold text-stone-700 dark:text-stone-300">
-              Password
-            </label>
-            <button
-              type="button"
-              onClick={handleForgotPassword}
-              className="text-xs font-medium text-primary-700 dark:text-primary-400 hover:underline focus:outline-none"
-            >
-              Forget Password?
-            </button>
-          </div>
+          <label className="text-xs font-semibold text-stone-700 dark:text-stone-300">
+            Password
+          </label>
           <div className="relative">
             <Lock className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input

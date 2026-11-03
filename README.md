@@ -12,7 +12,7 @@ BookNook is a cozy, modern community web application designed around a timeless 
 - **Robust Authentication & Protected Routes**: Powered by BetterAuth with MongoDB Adapter, featuring email/password sign-in with live uppercase/lowercase/length password validation badges, Google Social Login, and persistent sessions that never prematurely redirect users upon page reloads.
 - **Interactive Swiper.js Banner & Engaging Home Layout**: Responsive multi-slide hero carousel with smooth transitions, showcasing newest arrivals from the MongoDB database, alongside "How Borrowing Works" and authentic reader community reviews.
 - **Double Borrow Guard & Return Scheduling**: Intelligent borrowing modal allowing readers to set return schedules with validation guards preventing duplicate concurrent borrows of the exact same title.
-- **Full Contributor Management (CRUD)**: Contributors can add books with ImgBB cover upload integration, edit their book metadata in real-time modals, and safely delete listings using custom accessible confirmation dialogs (no native browser alerts).
+- **Full Contributor Management (CRUD)**: Contributors can add books, edit their book metadata in real-time modals, and safely delete listings using custom accessible confirmation dialogs (no native browser alerts).
 - **Tailored Modern Aesthetic with Dark & Light Themes**: Harmonious literary color palette, seamless dark/light theme switching with Next Themes, branded typography, and the official updated X social icon.
 
 ---
@@ -49,7 +49,6 @@ BookNook is a cozy, modern community web application designed around a timeless 
    - `BETTER_AUTH_URL`: Canonical URL for BetterAuth callbacks (`http://localhost:3000`)
    - `GOOGLE_CLIENT_ID`: (Optional) Google OAuth Client ID for social login
    - `GOOGLE_CLIENT_SECRET`: (Optional) Google OAuth Client Secret
-   - `NEXT_PUBLIC_IMGBB_API_KEY`: (Optional) ImgBB API Key for direct cover uploads
 
 4. Start the development server:
    ```bash

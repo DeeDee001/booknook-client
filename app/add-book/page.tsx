@@ -12,7 +12,6 @@ import {
   Mail,
   Layers,
   FileText,
-  UploadCloud,
   PlusCircle,
   Loader2,
   Copy,
@@ -32,47 +31,6 @@ function AddBookContent() {
   const [description, setDescription] = useState("");
   const [totalCopies, setTotalCopies] = useState<number>(1);
   const [submitting, setSubmitting] = useState(false);
-  const [uploadingImage, setUploadingImage] = useState(false);
-
-  // Upload image to ImgBB
-  const handleImageFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    if (!file.type.startsWith("image/")) {
-      toast.error("Please upload a valid image file (PNG, JPG, WEBP).");
-      return;
-    }
-
-    setUploadingImage(true);
-    try {
-      const formData = new FormData();
-      formData.append("image", file);
-
-      // ImgBB API key from env or default client key
-      const imgbbKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY || "e7ceb6bf43fa58a62fef7645fc30da79";
-      const res = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbKey}`, {
-        method: "POST",
-        body: formData,
-      });
-
-      const data = await res.json();
-      if (data.success && data.data?.url) {
-        setImage(data.data.url);
-        toast.success("Cover image uploaded successfully to ImgBB!");
-      } else {
-        // Fallback: create an object URL or show helpful guidance
-        const localPreview = URL.createObjectURL(file);
-        setImage(localPreview);
-        toast.info("Image preview loaded. You can also paste an image URL directly.");
-      }
-    } catch (err) {
-      console.error("ImgBB upload error:", err);
-      toast.error("Could not upload to ImgBB. You can paste an image URL directly.");
-    } finally {
-      setUploadingImage(false);
-    }
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -221,46 +179,22 @@ function AddBookContent() {
               </p>
             </div>
 
-            {/* Book Image (Upload to imgbb / direct link) */}
+            {/* Book Cover Image URL */}
             <div className="space-y-2 md:col-span-2">
               <label className="text-xs font-semibold text-stone-700 dark:text-stone-300">
-                Book Cover Image <span className="text-rose-500">*</span>
+                Book Cover Image URL <span className="text-rose-500">*</span>
               </label>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {/* Upload to ImgBB */}
-                <div className="border-2 border-dashed border-stone-300 dark:border-stone-700 rounded-xl p-4 text-center hover:border-primary-500 transition-colors flex flex-col items-center justify-center gap-2 bg-stone-50 dark:bg-stone-800/40">
-                  <UploadCloud className="w-8 h-8 text-stone-400" />
-                  <label className="cursor-pointer text-xs font-semibold text-primary-700 dark:text-primary-400 hover:underline">
-                    {uploadingImage ? "Uploading to ImgBB..." : "Click to Upload File (ImgBB)"}
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageFileUpload}
-                      disabled={uploadingImage}
-                      className="hidden"
-                    />
-                  </label>
-                  <span className="text-[11px] text-stone-400">PNG, JPG, or WEBP</span>
-                </div>
-
-                {/* Direct Image URL input */}
-                <div className="flex flex-col justify-center space-y-1.5">
-                  <span className="text-xs text-stone-500 dark:text-stone-400 font-medium">
-                    Or Paste Cover Image URL directly:
-                  </span>
-                  <div className="relative">
-                    <ImageIcon className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-                    <input
-                      type="url"
-                      value={image}
-                      onChange={(e) => setImage(e.target.value)}
-                      placeholder="https://images.unsplash.com/..."
-                      required
-                      className="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-stone-900 dark:text-stone-100 focus:outline-none focus:ring-2 focus:ring-primary-600 transition-all"
-                    />
-                  </div>
-                </div>
+              <div className="relative">
+                <ImageIcon className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <input
+                  type="url"
+                  value={image}
+                  onChange={(e) => setImage(e.target.value)}
+                  placeholder="https://images.unsplash.com/..."
+                  required
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm bg-stone-50 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-stone-900 dark:text-stone-100 focus:outline-none focus:ring-2 focus:ring-primary-600 transition-all"
+                />
               </div>
 
               {/* Cover Preview */}
@@ -336,7 +270,7 @@ function AddBookContent() {
           <div className="pt-4 border-t border-stone-100 dark:border-stone-800">
             <button
               type="submit"
-              disabled={submitting || uploadingImage}
+              disabled={submitting}
               className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-primary-700 hover:bg-primary-800 disabled:opacity-60 text-white font-bold text-sm shadow-md transition-all"
             >
               {submitting ? (
