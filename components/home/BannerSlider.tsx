@@ -38,7 +38,7 @@ export const BannerSlider: React.FC = () => {
   ];
 
   return (
-    <section className="relative w-full rounded-2xl overflow-hidden shadow-xl border border-stone-200 dark:border-stone-800">
+    <section className="relative w-full min-w-0 rounded-2xl overflow-hidden shadow-xl border border-stone-200 dark:border-stone-800">
       <Swiper
         modules={[Navigation, Pagination, Autoplay, EffectFade]}
         effect="fade"
@@ -52,7 +52,7 @@ export const BannerSlider: React.FC = () => {
         }}
         navigation
         loop
-        className="w-full h-[440px] sm:h-[500px] lg:h-[560px]"
+        className="w-full min-w-0 h-[460px] sm:h-[500px] lg:h-[560px]"
       >
         {slides.map((slide) => (
           <SwiperSlide key={slide.id}>
@@ -66,13 +66,13 @@ export const BannerSlider: React.FC = () => {
               </div>
 
               {/* Slide Content */}
-              <div className="relative z-10 max-w-2xl px-5 sm:px-12 lg:px-16 text-white space-y-4 sm:space-y-5">
+              <div className="relative z-10 max-w-2xl px-4 sm:px-12 lg:px-16 text-white space-y-3 sm:space-y-5 pb-8 sm:pb-0">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-600/30 border border-primary-500/40 backdrop-blur-md text-primary-200 text-xs sm:text-sm font-medium">
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>{slide.badge}</span>
                 </div>
 
-                <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-snug sm:leading-tight">
+                <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
                   {slide.title}
                 </h1>
 

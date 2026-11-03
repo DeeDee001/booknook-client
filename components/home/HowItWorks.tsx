@@ -27,8 +27,8 @@ export const HowItWorks: React.FC = () => {
   ];
 
   return (
-    <section className="py-12 sm:py-16">
-      <div className="text-center max-w-2xl mx-auto space-y-3 mb-12">
+    <section className="py-6 sm:py-12 lg:py-16">
+      <div className="text-center max-w-2xl mx-auto space-y-3 mb-6 sm:mb-12">
         <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-primary-700 dark:text-primary-400">
           Seamless Experience
         </span>
@@ -40,13 +40,13 @@ export const HowItWorks: React.FC = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
         {steps.map((item, index) => {
           const Icon = item.icon;
           return (
             <div
               key={item.step}
-              className="relative rounded-2xl p-6 sm:p-8 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 shadow-sm hover:shadow-lg transition-all flex flex-col justify-between"
+              className="relative rounded-2xl p-5 sm:p-8 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 shadow-sm hover:shadow-lg transition-all flex flex-col justify-between"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">

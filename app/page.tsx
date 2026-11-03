@@ -6,7 +6,7 @@ import { ReaderReviews } from "@/components/home/ReaderReviews";
 
 export default function HomePage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-8">
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-8 sm:space-y-12 min-w-0 overflow-x-hidden">
       {/* 1. Hero Swiper.js Slider (min 3 slides) */}
       <BannerSlider />
 

@@ -27,8 +27,8 @@ export const NewArrivals: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-12 sm:py-16">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+    <section className="py-6 sm:py-12 lg:py-16">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-10">
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-wider text-primary-700 dark:text-primary-400">
             <Sparkles className="w-4 h-4" />
@@ -86,7 +86,7 @@ export const NewArrivals: React.FC = () => {
       )}
 
       {/* Mobile "See All Books" button */}
-      <div className="mt-10 text-center md:hidden">
+      <div className="mt-6 sm:mt-10 text-center md:hidden">
         <Link
           href="/books"
           className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-primary-700 hover:bg-primary-800 text-white font-semibold shadow-sm transition-colors"

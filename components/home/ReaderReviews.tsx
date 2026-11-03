@@ -36,8 +36,8 @@ export const ReaderReviews: React.FC = () => {
   ];
 
   return (
-    <section className="py-12 sm:py-16">
-      <div className="text-center max-w-2xl mx-auto space-y-3 mb-12">
+    <section className="py-6 sm:py-12 lg:py-16">
+      <div className="text-center max-w-2xl mx-auto space-y-3 mb-6 sm:mb-12">
         <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-primary-700 dark:text-primary-400">
           Community Voices
         </span>
@@ -49,11 +49,11 @@ export const ReaderReviews: React.FC = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
         {reviews.map((item) => (
           <div
             key={item.id}
-            className="flex flex-col justify-between rounded-2xl p-6 sm:p-8 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 shadow-sm hover:shadow-lg transition-all"
+            className="flex flex-col justify-between rounded-2xl p-5 sm:p-8 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 shadow-sm hover:shadow-lg transition-all"
           >
             <div className="space-y-4">
               {/* Star Rating & Quote Icon */}
@@ -93,7 +93,7 @@ export const ReaderReviews: React.FC = () => {
       </div>
 
       {/* Trust Badges */}
-      <div className="mt-12 rounded-2xl bg-primary-50 dark:bg-primary-950/40 border border-primary-200 dark:border-primary-900/50 p-6 sm:p-8">
+      <div className="mt-8 sm:mt-12 rounded-2xl bg-primary-50 dark:bg-primary-950/40 border border-primary-200 dark:border-primary-900/50 p-5 sm:p-8">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
           <div className="space-y-1">
             <div className="text-2xl sm:text-3xl font-extrabold text-primary-800 dark:text-primary-300">

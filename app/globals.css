@@ -32,14 +32,17 @@
   --muted: #a8a29e;
 }
 
+html,
 body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
   background-color: var(--background);
   color: var(--foreground);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   transition: background-color 0.25s ease, color 0.25s ease;
-  overflow-x: hidden;
 }
 
 /* Custom modern scrollbar */
