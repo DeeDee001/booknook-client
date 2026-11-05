@@ -1,58 +1,143 @@
-# BookNook – A Small Online Library
+# 📚 BookNook – Online Community Library
 
-**Live Application URL**: [https://booknook-library.vercel.app](https://booknook-library.vercel.app) *(or your deployed production link)*
+> A warm, community-driven online library built on the philosophy: **"Add a book, borrow a book, return a book."**
 
-BookNook is a cozy, modern community web application designed around a timeless philosophy: **"Add a book, borrow a book, return a book."** It empowers book enthusiasts to explore diverse genres, contribute titles from their own collections, manage borrowing periods responsibly, and track reading milestones in an elegant single-page application experience.
-
----
-
-## Key Website Features
-
-- **Dynamic Catalog & Real-Time Stock Management**: Explore the entire library catalog with instant keyword search, genre filtering (Fiction, Science, History, Kids, Others), and sorting. Inventory decrement (`$inc: -1`) upon borrowing and restore (`$inc: +1`) upon return are tracked accurately in real time.
-- **Robust Authentication & Protected Routes**: Powered by BetterAuth with MongoDB Adapter, featuring email/password sign-in with live uppercase/lowercase/length password validation badges, Google Social Login, and persistent sessions that never prematurely redirect users upon page reloads.
-- **Interactive Swiper.js Banner & Engaging Home Layout**: Responsive multi-slide hero carousel with smooth transitions, showcasing newest arrivals from the MongoDB database, alongside "How Borrowing Works" and authentic reader community reviews.
-- **Double Borrow Guard & Return Scheduling**: Intelligent borrowing modal allowing readers to set return schedules with validation guards preventing duplicate concurrent borrows of the exact same title.
-- **Full Contributor Management (CRUD)**: Contributors can add books, edit their book metadata in real-time modals, and safely delete listings using custom accessible confirmation dialogs (no native browser alerts).
-- **Tailored Modern Aesthetic with Dark & Light Themes**: Harmonious literary color palette, seamless dark/light theme switching with Next Themes, branded typography, and the official updated X social icon.
+**Live Website**: [https://booknook-client-dee-dee2.vercel.app](https://booknook-client-dee-dee2.vercel.app)  
+**Backend API**: [https://booknook-server-dee-dee2.vercel.app](https://booknook-server-dee-dee2.vercel.app)
 
 ---
 
-## Technologies Used
+## 📖 About The Project
 
-- **Framework**: Next.js 14 / 15 (App Router, Server & Client Components)
-- **Styling**: Tailwind CSS, Next Themes
-- **Authentication**: BetterAuth, MongoDB Adapter, JWT Validation
-- **Icons & UI Enhancements**: Lucide React, React Icons (official X icon), Sonner Toast Notifications
-- **Sliders & Motion**: Swiper.js, Framer Motion
-- **Language**: TypeScript
+**BookNook** is a modern full-stack web application designed to make reading and community sharing simple, enjoyable, and accessible. It connects readers together by allowing them to discover literary titles across various genres, borrow books with a click, schedule return dates, and contribute their own cherished books to the library shelves.
+
+Whether you're searching for your next weekend read, looking to lend your books to fellow readers, or keeping track of your borrowed titles, BookNook provides a seamless, clutter-free reading haven with instant inventory tracking and a fully responsive experience across mobile and desktop.
 
 ---
 
-## Local Setup & Development
+## ✨ Features
 
-1. Navigate to the client directory:
-   ```bash
-   cd client-side
-   ```
+- **Dynamic Book Catalog & Discovery**:
+  - Browse books with real-time text search (by title or author).
+  - Filter books easily by genre/category (*Fiction, Science, History, Kids, and others*).
+  - View real-time availability badges and remaining stock copies.
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+- **Seamless Borrow & Return System**:
+  - **One-Click Borrowing**: Readers can pick a return date and borrow instantly.
+  - **Automatic Inventory Updates**: Available copies decrement automatically when borrowed (`-1`) and restore when returned (`+1`).
+  - **Duplicate Borrow Guard**: Prevents a reader from borrowing the same book multiple times simultaneously.
+  - **My Borrows Dashboard**: View all currently borrowed books and return them with a single click.
 
-3. Configure Environment Variables:
-   Create a `.env.local` file in the root of `client-side` (this file is strictly ignored by Git to protect your secret credentials):
-   - `NEXT_PUBLIC_API_URL`: Your Express backend server URL (e.g. `http://localhost:5000`)
-   - `NEXT_PUBLIC_APP_URL`: Your Next.js frontend URL (e.g. `http://localhost:3000`)
-   - `MONGODB_URI`: Your MongoDB connection string for BetterAuth
-   - `BETTER_AUTH_SECRET`: Secret key for BetterAuth session encryption
-   - `BETTER_AUTH_URL`: Canonical URL for BetterAuth callbacks (`http://localhost:3000`)
-   - `GOOGLE_CLIENT_ID`: (Optional) Google OAuth Client ID for social login
-   - `GOOGLE_CLIENT_SECRET`: (Optional) Google OAuth Client Secret
+- **Personal Bookshelf & Contributor Management (CRUD)**:
+  - Add new books to the library with cover image, category, copies, and description.
+  - **My Books Page**: Manage titles you have contributed to the library.
+  - Edit book metadata in real-time using clean interactive modals.
+  - Delete books safely with accessible custom confirmation dialogs (no native browser popups).
 
-4. Start the development server:
-   ```bash
-   npm run dev
-   ```
+- **Secure Authentication & User Experience**:
+  - Email & Password registration and login powered by **BetterAuth**.
+  - **Google Social Sign-in** for fast 1-click access.
+  - Real-time password validation indicators (*Uppercase, Lowercase, Minimum 6 characters*).
+  - Persistent user sessions across page reloads without unwanted redirects.
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+- **Responsive & Modern UI**:
+  - Interactive hero banner carousel powered by **Swiper.js**.
+  - **Dark & Light Mode** toggle with persistent theme preference.
+  - Fully mobile-responsive layout optimized for smartphones, tablets, and desktop screens.
+  - Toast feedback notifications powered by **Sonner**.
+
+---
+
+## 🛠️ Technologies Used
+
+### Frontend
+- **Framework**: [Next.js 14](https://nextjs.org/) (App Router, Server & Client Components)
+- **Library**: [React 18](https://react.dev/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Theme Support**: [next-themes](https://github.com/pacocoursey/next-themes) (Dark & Light Mode)
+
+### UI & Utilities
+- **Slider**: [Swiper.js](https://swiperjs.com/) (Hero Banner Carousel)
+- **Icons**: [Lucide React](https://lucide.dev/) & [React Icons](https://react-icons.github.io/react-icons/)
+- **Notifications**: [Sonner](https://sonner.emilkowal.ski/) (Toast notifications)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+
+### Authentication & Database Integration
+- **Auth Provider**: [BetterAuth](https://www.better-auth.com/) with MongoDB Adapter & JWT sessions
+- **Database**: [MongoDB](https://www.mongodb.com/) (Atlas)
+- **Backend API**: Express.js REST API with CORS & token verification
+
+---
+
+## 🚀 How to Run Locally
+
+Follow these steps to set up and run the client-side application locally on your machine.
+
+### Prerequisites
+
+Ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (v18.17.0 or higher recommended)
+- [npm](https://www.npmjs.com/) (comes with Node.js)
+- A running instance of the BookNook Express backend or the deployed backend API URL
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/DeeDee001/booknook-client.git
+cd booknook-client
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Setup Environment Variables
+
+Create a `.env.local` file in the root of the project:
+
+```bash
+touch .env.local
+```
+
+Add the following environment variables to `.env.local`:
+
+```env
+# Backend API URL (Local or Deployed Express Server)
+NEXT_PUBLIC_API_URL=http://localhost:5000
+
+# Next.js Application URL
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+
+# BetterAuth Configuration
+BETTER_AUTH_SECRET=your_better_auth_secret_here
+BETTER_AUTH_URL=http://localhost:3000
+
+# MongoDB Connection String (for BetterAuth user & session storage)
+MONGODB_URI=your_mongodb_connection_string_here
+
+# (Optional) Google OAuth Credentials for Social Login
+GOOGLE_CLIENT_ID=your_google_client_id_here
+GOOGLE_CLIENT_SECRET=your_google_client_secret_here
+```
+
+### 4. Run the Development Server
+
+```bash
+npm run dev
+```
+
+### 5. Open the Application
+
+Open your browser and navigate to:
+```
+http://localhost:3000
+```
+
+---
+
+## 📄 License & Credits
+
+Developed with ❤️ by **DeeDee** for book lovers everywhere.
