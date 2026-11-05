@@ -2,8 +2,8 @@
 
 > A warm, community-driven online library built on the philosophy: **"Add a book, borrow a book, return a book."**
 
-**Live Website**: [https://booknook-client-dee-dee2.vercel.app](https://booknook-client-dee-dee2.vercel.app)  
-**Backend API**: [https://booknook-server-dee-dee2.vercel.app](https://booknook-server-dee-dee2.vercel.app)
+**Live Website**: [https://booknook-client-self-seven.vercel.app](https://booknook-client-self-seven.vercel.app/)  
+**Backend API**: [https://booknook-server-cyan.vercel.app](https://booknook-server-cyan.vercel.app)
 
 ---
 
